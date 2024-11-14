@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-postgres
+  labels:
+    db: shop-postgres
+spec:
+  selector:
+    matchLabels:
+      db: shop-postgres
+  template:
+    metadata:
+      labels:
+        db: shop-postgres
+    spec:
+      containers:
+        - name: shop-postgres
+          image: postgres:14.14
+          env:
+            - name: POSTGRES_USER
+              value: user
+            - name: POSTGRES_PASSWORD
+              value: password 
+            - name: POSTGRES_DB
+              value: shopdb_catalog
+          resources:
+            requests:
+              cpu: 100m
+              memory: 60Mi
+            limits:
+              cpu: 200m
+              memory: 120Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: shop-postgres
+  labels:
+    db: shop-postgres
+spec:
+  type: ClusterIP
+  selector:
+    db: shop-postgres
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
