@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: shop-postgres
-          image: postgres:14.14
+          image: postgres
           env:
             - name: POSTGRES_USER
               value: user
