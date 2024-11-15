@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: polar-redis
+  name: shop-redis
   labels:
-    db: polar-redis
+    db: shop-redis
 spec:
   selector:
     matchLabels:
-      db: polar-redis
+      db: shop-redis
   template:
     metadata:
       labels:
-        db: polar-redis
+        db: shop-redis
     spec:
       containers:
-        - name: polar-redis
+        - name: shop-redis
           image: redis:7.2
           resources:
             requests:
@@ -29,13 +29,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: polar-redis
+  name: shop-redis
   labels:
-    db: polar-redis
+    db: shop-redis
 spec:
   type: ClusterIP
   selector:
-    db: polar-redis
+    db: shop-redis
   ports:
   - protocol: TCP
     port: 6379

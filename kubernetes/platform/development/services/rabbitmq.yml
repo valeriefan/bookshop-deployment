@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: rabbitmq-config
   labels:
-    db: polar-rabbitmq
+    db: shop-rabbitmq
 data:
   rabbitmq.conf: |
     default_user = user
@@ -15,20 +15,20 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: polar-rabbitmq
+  name: shop-rabbitmq
   labels:
-    db: polar-rabbitmq
+    db: shop-rabbitmq
 spec:
   selector:
     matchLabels:
-      db: polar-rabbitmq
+      db: shop-rabbitmq
   template:
     metadata:
       labels:
-        db: polar-rabbitmq
+        db: shop-rabbitmq
     spec:
       containers:
-        - name: polar-rabbitmq
+        - name: shop-rabbitmq
           image: rabbitmq:3.13-management
           resources:
             requests:
@@ -50,13 +50,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: polar-rabbitmq
+  name: shop-rabbitmq
   labels:
-    db: polar-rabbitmq
+    db: shop-rabbitmq
 spec:
   type: ClusterIP
   selector:
-    db: polar-rabbitmq
+    db: shop-rabbitmq
   ports:
   - name: amqp
     protocol: TCP

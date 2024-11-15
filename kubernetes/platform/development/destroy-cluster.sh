@@ -2,8 +2,8 @@
 
 echo "\n🏴️ Destroying Kubernetes cluster...\n"
 
-minikube stop --profile polar
+minikube stop --profile shop
 
-minikube delete --profile polar
+minikube delete --profile shop
 
 echo "\n🏴️ Cluster destroyed\n"
